@@ -36,4 +36,4 @@ mypy==1.11.2
 pre-commit==3.8.0
 
 # Load Testing
-locust==2.32.0
+locust==2.46.6
