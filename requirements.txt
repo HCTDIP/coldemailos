@@ -19,7 +19,7 @@ rich==13.9.0
 # Database (optional, for suppression list)
 sqlalchemy==2.0.34
 alembic==1.13.1
-aiosqlite==0.20.0
+aiosqlite==0.22.1
 
 # Monitoring
 prometheus-client==0.20.0
