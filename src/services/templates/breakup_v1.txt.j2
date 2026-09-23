@@ -1,0 +1,13 @@
+Hi {{ first_name|default("there") },
+
+I haven't heard back, so I'll assume the timing isn't right — no worries at all.
+
+I'll close your file for now. If hiring picks up again, just reply to this email and I'll be here.
+
+All the best with {{ company|default("the team") }}!
+
+Cheers,
+{{ sender_name|default("The ColdEmailOS Team") }}
+
+---
+Unsubscribe: {{ unsubscribe_url|default('#') }} • Preferences: {{ preferences_url|default('#') }}

@@ -1,0 +1,25 @@
+# Fly.io Deployment Config
+app = "coldemailos"
+primary_region = "sin"  # Singapore - close to iSH users
+
+[build]
+  dockerfile = "deploy/Dockerfile"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[health_checks]
+  interval = "30s"
+  timeout = "10s"
+  grace_period = "30s"
+  path = "/health"
+
+[env]
+  PYTHONUNBUFFERED = "1"
+  LOG_LEVEL = "INFO"
+  # BREVO_API_KEY = set via fly secrets
+  # WEBHOOK_URL = set via fly secrets

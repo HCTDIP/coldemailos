@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ColdEmailOS — Lead Capture</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f6f9fc; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .card { background: #fff; border-radius: 16px; padding: 40px; max-width: 420px; width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+    .tagline { color: #6b7280; font-size: 15px; margin-bottom: 32px; }
+    h1 { font-size: 28px; color: #1a1a2e; margin-bottom: 8px; }
+    .subtitle { color: #6b7280; margin-bottom: 32px; font-size: 15px; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 14px; font-weight: 500; color: #374151; margin-bottom: 8px; }
+    input, select { width: 100%; padding: 14px 16px; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 15px; color: #1a1a2e; background: #fafafa; transition: all 0.2s; }
+    input:focus, select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); background: #fff; }
+    .checkbox-group { display: flex; align-items: flex-start; gap: 10px; }
+    .checkbox-group input { width: 18px; height: 18px; margin-top: 2px; accent-color: #2563eb; }
+    .checkbox-group label { font-size: 13px; color: #6b7280; margin: 0; line-height: 1.5; }
+    .checkbox-group a { color: #2563eb; text-decoration: none; }
+    .checkbox-group a:hover { text-decoration: underline; }
+    button { width: 100%; padding: 16px; background: #2563eb; color: #fff; font-size: 16px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #1d4ed8; }
+    button:disabled { background: #9ca3af; cursor: not-allowed; }
+    .success { display: none; text-align: center; padding: 20px; }
+    .success.show { display: block; }
+    .success-icon { width: 64px; height: 64px; background: #dcfce7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #16a34a; }
+    .success h2 { color: #16a34a; margin-bottom: 8px; }
+    .success p { color: #6b7280; }
+    .error { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 12px; border-radius: 8px; margin-bottom: 20px; display: none; font-size: 14px; }
+    .error.show { display: block; }
+    .powered-by { text-align: center; margin-top: 24px; color: #9ca3af; font-size: 12px; }
+    .powered-by a { color: #2563eb; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">ColdEmailOS</div>
+    <div class="tagline">Zero-cost cold email infrastructure</div>
+
+    <h1>Get the Technical Hiring Guide</h1>
+    <p class="subtitle">How 50+ engineering teams cut false-positive rejections by 84%</p>
+
+    <div class="error" id="error"></div>
+
+    <form id="leadForm">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="first_name" placeholder="Sarah" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Work Email</label>
+        <input type="email" id="email" name="email" placeholder="sarah@vercel.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" placeholder="Vercel" required>
+      </div>
+
+      <div class="form-group">
+        <label for="source">How did you hear about us?</label>
+        <select id="source" name="source">
+          <option value="twitter">Twitter / X</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="newsletter">Newsletter</option>
+          <option value="search">Search</option>
+          <option value="referral">Referral</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">
+          I agree to receive the guide and occasional updates from <a href="https://coldemailos.dev">ColdEmailOS</a>.
+          <a href="#">Privacy Policy</a> • <a href="#">Unsubscribe anytime</a>
+        </label>
+      </div>
+
+      <button type="submit" id="submitBtn">Get the Guide →</button>
+    </form>
+
+    <div class="success" id="success">
+      <div class="success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>You're in! 🎉</h2>
+      <p>Check your inbox for the guide. If you don't see it, check spam.</p>
+    </div>
+
+    <div class="powered-by">
+      Powered by <a href="https://coldemailos.dev">ColdEmailOS</a> — 300 emails/day, $0/month
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('leadForm');
+    const errorEl = document.getElementById('error');
+    const successEl = document.getElementById('success');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Replace with your deployed API URL
+    const API_URL = 'https://your-coldemailos.railway.app/api/leads/capture';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.remove('show');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      const data = {
+        first_name: form.first_name.value.trim(),
+        email: form.email.value.trim(),
+        company: form.company.value.trim(),
+        source: form.source.value,
+        consent: form.consent.checked,
+      };
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+          throw new Error(result.detail || 'Submission failed');
+        }
+
+        form.style.display = 'none';
+        successEl.classList.add('show');
+
+      } catch (err) {
+        errorEl.textContent = err.message;
+        errorEl.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Get the Guide →';
+      }
+    });
+  </script>
+</body>
+</html>

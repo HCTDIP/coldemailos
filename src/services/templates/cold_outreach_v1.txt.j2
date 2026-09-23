@@ -1,0 +1,18 @@
+Hi {{ first_name|default("there") }},
+
+I noticed {{ company|default("your team") }} is hiring for {{ pain_point|default("engineering roles") }} — congrats on the growth!
+
+I'm reaching out because we help companies like {{ proof|default("Vercel, Linear, Railway") }} cut hiring time by 60% using automated technical assessments that developers actually respect.
+
+Worth a quick chat this week? I'll keep it to 15 minutes — no sales pitch, just show you how it works.
+
+Pick a time: {{ cal_link|default('https://cal.com/coldemailos') }}
+
+If now's not a good time, just let me know — happy to follow up next quarter.
+
+Best,
+{{ sender_name|default("The ColdEmailOS Team") }}
+coldemailos.dev
+
+---
+Sent via Brevo • Unsubscribe: {{ unsubscribe_url|default('#') }} • Preferences: {{ preferences_url|default('#') }}

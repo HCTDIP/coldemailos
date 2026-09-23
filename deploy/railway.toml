@@ -1,0 +1,19 @@
+# Railway Deployment Config
+[build]
+builder = "dockerfile"
+dockerfilePath = "deploy/Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[env]
+# Required: Set in Railway dashboard
+# BREVO_API_KEY = "xkeysib-xxxxx"
+# WEBHOOK_URL = "https://your-app.railway.app/webhooks/brevo"
+
+# Optional
+PYTHONUNBUFFERED = "1"
+LOG_LEVEL = "INFO"

@@ -1,0 +1,21 @@
+# Render Deployment Config (render.yaml)
+services:
+  - type: web
+    name: coldemailos
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: BREVO_API_KEY
+        sync: false  # Set in dashboard
+      - key: WEBHOOK_URL
+        fromService:
+          name: coldemailos
+          type: web
+          property: host
+        sync: false
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: LOG_LEVEL
+        value: "INFO"
+    autoDeploy: true

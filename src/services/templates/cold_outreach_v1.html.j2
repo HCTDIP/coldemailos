@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ subject }}</title>
+  <!--[if mso]><style>table {border-collapse: collapse;}</style><![endif]-->
+</head>
+<body style="margin:0;padding:0;background:#f6f9fc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#1a1a2e">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;padding:40px 20px">
+    <tr>
+      <td style="background:#ffffff;border-radius:12px;padding:40px 32px;box-shadow:0 2px 8px rgba(0,0,0,0.05)">
+        <!-- Header -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px">
+          <tr>
+            <td style="padding-bottom:16px;border-bottom:1px solid #eef2f7">
+              <span style="font-size:18px;font-weight:700;color:#1a1a2e">ColdEmailOS</span>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Body -->
+        <p style="margin:0 0 16px;font-size:16px;color:#1a1a2e">
+          Hi {{ first_name|default("there") }},
+        </p>
+
+        <p style="margin:0 0 16px;font-size:16px;color:#374151">
+          I noticed {{ company|default("your team") }} is hiring for <strong>{{ pain_point|default("engineering roles") }}</strong> — congrats on the growth!
+        </p>
+
+        <p style="margin:0 0 16px;font-size:16px;color:#374151">
+          I'm reaching out because we help companies like {{ proof|default("Vercel, Linear, Railway") }} cut hiring time by 60% using automated technical assessments that developers actually respect.
+        </p>
+
+        <p style="margin:0 0 24px;font-size:16px;color:#374151">
+          Worth a quick chat this week? I'll keep it to 15 minutes — no sales pitch, just show you how it works.
+        </p>
+
+        <!-- CTA -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin:32px 0">
+          <tr>
+            <td align="center">
+              <a href="{{ cal_link|default('https://cal.com/coldemailos') }}" style="display:inline-block;background:#2563eb;color:#ffffff;font-weight:600;font-size:15px;padding:14px 28px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(37,99,235,0.3)">
+                Pick a time that works
+              </a>
+            </td>
+          </tr>
+        </table>
+
+        <p style="margin:24px 0 0;font-size:14px;color:#6b7280">
+          If now's not a good time, just let me know — happy to follow up next quarter.
+        </p>
+
+        <hr style="border:none;border-top:1px solid #eef2f7;margin:32px 0">
+
+        <!-- Footer -->
+        <p style="margin:0 0 8px;font-size:13px;color:#9ca3af">
+          Best,<br>
+          <strong>{{ sender_name|default("The ColdEmailOS Team") }}</strong><br>
+          <a href="https://coldemailos.dev" style="color:#2563eb;text-decoration:none">coldemailos.dev</a>
+        </p>
+
+        <p style="margin:16px 0 0;font-size:12px;color:#9ca3af">
+          Sent via <a href="https://brevo.com" style="color:#9ca3af">Brevo</a> •
+          <a href="{{ unsubscribe_url|default('#') }}" style="color:#9ca3af">Unsubscribe</a> •
+          <a href="{{ preferences_url|default('#') }}" style="color:#9ca3af">Preferences</a>
+        </p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
